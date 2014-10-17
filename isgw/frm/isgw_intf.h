@@ -1,0 +1,41 @@
+/************************************************************
+  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  FileName: isgw_intf.h
+  Author: awayfang              Date: 2008-06-01
+  Description:
+      tcp socket handler/net interface 
+***********************************************************/
+#ifndef _ISGW_INTF_H_
+#define _ISGW_INTF_H_
+#include "isgw_comm.h"
+#include "ace_sock_hdr_base.h"
+
+#ifndef MAX_RECV_BUF_LEN
+#define MAX_RECV_BUF_LEN MAX_INNER_MSG_LEN
+#endif
+
+class ISGWIntf : public AceSockHdrBase
+{
+
+public:
+    ISGWIntf();
+    virtual ~ISGWIntf();
+    virtual int open(void * = 0);
+    virtual int handle_input (ACE_HANDLE fd = ACE_INVALID_HANDLE);
+    virtual int process(char* msg, int sock_fd, int sock_seq, int msg_len);
+    int is_legal(char* msg);
+    int is_auth();
+
+private:
+    char recv_buf_[MAX_RECV_BUF_LEN+1];
+    //已经接收到的消息长度，应该处理的消息部分，buf后面可能有垃圾消息
+    unsigned int  recv_len_; 
+    //一个完整的消息包的长度，一般不包括消息长度字节,但是包括结束符
+    unsigned int  msg_len_;
+    //此处是近似的原子操作 如果担心可以用 ACE_Atomic_Op<ACE_Thread_Mutex, int>  替代 
+    static int msg_seq_;//消息本身的序列号和网络连接的序列号有区别 
+};
+
+typedef ACE_Acceptor<ISGWIntf, ACE_SOCK_ACCEPTOR> ISGW_ACCEPTOR;
+
+#endif  //_ISGW_INTF_H_
