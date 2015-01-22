@@ -14,13 +14,21 @@ ISGWAck* ISGWAck::instance()
     return instance_;
 }
 
-ISGWAck* ISGWAck::instance(int tv)
+int ISGWAck::init(int tv)
 {
-    if (instance_ == NULL)
+
+#ifdef ISGW_ACK_USE_TIMER
+    if (tv < DEFAULT_TIME_INTERVAL) //最小不能小于1 ms 
     {
-        instance_ = new ISGWAck(tv);
+        tv = DEFAULT_TIME_INTERVAL;
     }
-    return instance_;
+    ACE_Time_Value delay(0,0);
+    ACE_Time_Value interval(0, tv);
+    ACE_Reactor::instance()->schedule_timer(this, 0, delay, interval);
+    ACE_DEBUG((LM_INFO, "[%D] ISGWAck init timer succ,tv=%d\n", tv));
+#endif
+    
+    return 0;
 }
 
 void ISGWAck::putq(PriProAck* ack_msg)
@@ -32,7 +40,11 @@ void ISGWAck::putq(PriProAck* ack_msg)
         return ;
     }
     msg_queue_.push_back(ack_msg);
-    //notification_strategy_.notify(); // ace 的这个通知机制有 bug 并且有内存泄漏 shit 
+#ifdef ISGW_ACK_USE_TIMER 
+    
+#else
+    notify_stgy_.notify(); //6.2以上版本好像没有bug了 
+#endif
 
     struct timeval tv_now;
     gettimeofday(&tv_now, NULL);
@@ -41,7 +53,7 @@ void ISGWAck::putq(PriProAck* ack_msg)
     if(time_diff>ALARM_TIMEOUT*10000)
     {
         ACE_DEBUG((LM_ERROR, "[%D] ISGWAck put queue failed timeout,sock_fd=%u,prot=%u,ip=%u"
-            ",port=%u,sock_seq=%u,seq_no=%u,time_diff=%u,que_size=%d,msg=%s\n"
+            ",port=%u,sock_seq=%u,seq_no=%u,time_diff=%u,que_size=%d,cmd=%d,msg=%s\n"
             ,ack_msg->sock_fd
             ,ack_msg->protocol
             ,ack_msg->sock_ip
@@ -50,6 +62,7 @@ void ISGWAck::putq(PriProAck* ack_msg)
             ,ack_msg->seq_no
             ,time_diff
             ,msg_queue_.size()
+            ,ack_msg->cmd
             ,ack_msg->msg
             ));
         Stat::instance()->incre_stat(STAT_CODE_PUT_ACK_TIMEOUT);
@@ -71,11 +84,21 @@ void ISGWAck::putq(PriProAck* ack_msg)
 
 unsigned int ISGWAck::get_time()
 {
+#ifdef ISGW_ACK_USE_TIMER
+
+#else
+    gettimeofday(&time_, NULL);
+#endif
     return (uint32)time_.tv_sec;
 }
 
 unsigned int ISGWAck::get_utime()
 {
+#ifdef ISGW_ACK_USE_TIMER
+    
+#else
+    gettimeofday(&time_, NULL);
+#endif
     return (uint32)time_.tv_usec;
 }
 
@@ -182,8 +205,11 @@ int ISGWAck::process()
                 , msg->procs_span
                 , msg->msg_len
                 ));        
-        int ret = 0;
-        ret = intf->send_n(msg->msg, msg->msg_len);
+        if(-1==intf->send_n(msg->msg, msg->msg_len))
+        {
+            //发送失败则主动关闭连接
+            intf->close();
+        }
         //尽早 reclaim memory //回收响应消息资源 
         if (msg != NULL)
         {
@@ -207,9 +233,7 @@ int ISGWAck::handle_input(ACE_HANDLE /* fd = ACE_INVALID_HANDLE */)
 
 int ISGWAck::handle_timeout(const ACE_Time_Value & tv, const void * arg)
 {
-    //ACE_DEBUG((LM_NOTICE, "[%D] ISGWAck handle_timeout\n"));
-    //time_ = time(0);
-    
+    //ACE_DEBUG((LM_NOTICE, "[%D] ISGWAck handle_timeout\n"));    
     gettimeofday(&time_, NULL);
     while (process() != 0)
     {

@@ -357,7 +357,7 @@ int ISGWCIntf::process(char* msg, int sock_fd, int sock_seq, int msg_len)
         // 获取到原始请求的前端连接信息 
         ack->sock_ip = remote_addr_.get_ip_address();
         ack->sock_port = remote_addr_.get_port_number();
-        gettimeofday(&(ack->tv_time), NULL);
+        ::gettimeofday(&(ack->tv_time), NULL);
 #ifdef _ISGW_CINTF_PARSE_ 
         isgw_cintf_parse(ack);
 #else

@@ -13,7 +13,8 @@ typedef enum _PDB_CMD
     // 100 - 200 测试用 
     CMD_QUERY_VIP = 101, //查询vip
     CMD_TEST_CINTF = 102, 
-    CMD_TEST_COMM = 103, 
+    CMD_TEST_COMM = 103,
+    CMD_TEST_ADMIN_STT = 104, 
     // 200-999 为 游戏人生 igame 项目使用命令字
 /******************************************************************************
  * 积分系统(pnh)指令 201 - 220 

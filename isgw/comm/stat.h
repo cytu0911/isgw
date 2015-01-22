@@ -1,5 +1,5 @@
 /********************************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: stat.h
   Author: jinglinma awayfang              Date: 2009-12-10
   Description:

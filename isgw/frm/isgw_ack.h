@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: isgw_ack.h
   Author: awayfang              Date: 2008-06-01
   Description:
@@ -15,11 +15,16 @@
 #define ALARM_TIMEOUT 1 //单位秒
 #endif
 
+//6.2以下版本使用定时器机制
+#if (ACE_MAJOR_VERSION<6 ||(ACE_MAJOR_VERSION==6 && ACE_MINOR_VERSION<2)) 
+#define ISGW_ACK_USE_TIMER 1
+#endif
+
 class ISGWAck : public ACE_Event_Handler
 {
 public:
     static ISGWAck* instance(); 
-    static ISGWAck* instance(int tv);
+    int init(int tv);
     void putq(PriProAck* ack_msg);
     virtual int handle_input(ACE_HANDLE fd = ACE_INVALID_HANDLE);
     virtual int handle_timeout(const ACE_Time_Value& tv, const void *arg);
@@ -27,27 +32,16 @@ public:
     unsigned int get_utime();
 
 private:
-    ISGWAck() : notification_strategy_(ACE_Reactor::instance(),
+    ISGWAck() : notify_stgy_(ACE_Reactor::instance(),
         this, ACE_Event_Handler::READ_MASK)
     {
         
-        ACE_Time_Value delay(0,0);
-        ACE_Time_Value interval(0,DEFAULT_TIME_INTERVAL);
-        ACE_Reactor::instance()->schedule_timer(this, 0, delay, interval);
-    }
-    ISGWAck(int tv) : notification_strategy_(ACE_Reactor::instance(),
-        this, ACE_Event_Handler::READ_MASK)
-    {
-        
-        ACE_Time_Value delay(0,0);
-        ACE_Time_Value interval(0, tv);
-        ACE_Reactor::instance()->schedule_timer(this, 0, delay, interval);
     }
     int process();
     uint32 statisitc(PriProAck* ack_msg);
 
 private:
-    ACE_Reactor_Notification_Strategy notification_strategy_;
+    ACE_Reactor_Notification_Strategy notify_stgy_;
     ACE_Thread_Mutex queue_lock_;
     deque<PriProAck*> msg_queue_;
 

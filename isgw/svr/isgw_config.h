@@ -19,5 +19,7 @@
 //#define FIELD_NAME_CMD ""
 //#define ALARM_TIMEOUT 1
 #define OBJECT_QUEUE_SIZE 5000
+//用于支持空闲连接清理，配置了就表示要清理
+//#define MAX_IDLE_TIME_SEC 600 //单位 s 
 
 #endif //_ISGW_CONFIG_H_

@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: isgw_uintf.cpp
   Author: awayfang            Date: 2008-06-25
   Description:     
@@ -57,8 +57,6 @@ int ISGWUIntf::open(const ACE_INET_Addr &svr_addr)
         ACE_DEBUG((LM_ERROR, "[%D] ISGWUIntf register failed\n"));
         return -1;
     }
-    // set ack msg svr addr
-    //ISGWAck::instance()->set_addr(svr_addr);
     
     return 0;
 }
@@ -227,11 +225,7 @@ int ISGWUIntf::is_auth()
 }
 
 int ISGWUIntf::send_udp(char* ack_msg, int send_len, const ACE_INET_Addr& to_addr)
-{
-    //ACE_SOCK_Dgram send_dgm; // udp sock
-    //ACE_INET_Addr local_addr;    
-    //send_dgm.open(local_addr);
-    
+{   
     ACE_DEBUG((LM_TRACE,"[%D] ISGWUIntf start to send dmsg"
 		", to addr=%s"
 		", port=%d"
@@ -260,9 +254,6 @@ int ISGWUIntf::send_udp(char* ack_msg, int send_len, const ACE_INET_Addr& to_add
         ACE_DEBUG((LM_TRACE,"[%D] ISGWUIntf send udp ack msg succ, ret=%d\n", ret));
     }
     
-    //send_dgm.close();
     return ret;
-    
 }
-
 

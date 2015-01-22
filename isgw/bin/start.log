@@ -1,0 +1,165 @@
+./start.sh: line 24: ..//bin//isgw_svrd: Permission denied
+[2014-12-11 18:06:43.579406] ISGWApp use dev poll reactor, ACE_FD_SETSIZE=1024
+[2014-12-11 18:06:43.581654] init reactor succ
+[2014-12-11 18:06:43.581706] path changed to ..//bin/
+[2014-12-11 18:06:43.582322] reading section: handle
+[2014-12-11 18:06:43.582395] config:timer=0
+[2014-12-11 18:06:43.582414] config:interval=1000000
+[2014-12-11 18:06:43.582433] reading section: identify
+[2014-12-11 18:06:43.582447] config:passwd=
+[2014-12-11 18:06:43.582463] config:user=
+[2014-12-11 18:06:43.582481] reading section: common
+[2014-12-11 18:06:43.582496] config:svrs_file=../cfg/svrs.ini
+[2014-12-11 18:06:43.582510] config:log_mask=-m 102400 -N 10 -f OSTREAM -p~DEBUG|~TRACE|~NOTICE -s ../log/isgw_svrd.log
+[2014-12-11 18:06:43.582527] reading section: ibc_mgr_svc
+[2014-12-11 18:06:43.582542] config:discard_time=3
+[2014-12-11 18:06:43.582556] config:quesize=104857600
+[2014-12-11 18:06:43.582571] config:max_ibcr_record=1000
+[2014-12-11 18:06:43.582584] config:threads=100
+[2014-12-11 18:06:43.582601] reading section: isgw_mgr_svc
+[2014-12-11 18:06:43.582615] config:discard_time=2
+[2014-12-11 18:06:43.582628] config:dllname=oper
+[2014-12-11 18:06:43.582642] config:quesize=104857600
+[2014-12-11 18:06:43.582655] config:threads=100
+[2014-12-11 18:06:43.582668] config:discard_flag=1
+[2014-12-11 18:06:43.582685] reading section: system
+[2014-12-11 18:06:43.582719] config:udp_allow_ip=172.25.40.94;
+[2014-12-11 18:06:43.582734] config:allow_ip=172.25.40.94;
+[2014-12-11 18:06:43.582747] config:udp_port=5693
+[2014-12-11 18:06:43.582760] config:port=5693
+[2014-12-11 18:06:43.582775] config:svr_cfg_use_db_flag=1
+[2014-12-11 18:06:43.582788] config:ibc_svc_flag=0
+[2014-12-11 18:06:43.582802] config:udp_allow_flag=0
+[2014-12-11 18:06:43.582815] config:udp_flag=0
+[2014-12-11 18:06:43.582829] config:allow_flag=0
+[2014-12-11 18:06:43.582842] config:tcp_flag=1
+[2014-12-11 18:06:43.582856] config:ack_interval=0
+[2014-12-11 18:06:43.582876] reading section: router
+[2014-12-11 18:06:43.582889] config:conn_num_0=3
+[2014-12-11 18:06:43.582902] config:port_0=5993
+[2014-12-11 18:06:43.582916] config:ip_0=172.25.40.94
+[2014-12-11 18:06:43.582929] config:route_flag=0
+[2014-12-11 18:06:43.582946] reading section: cmd_amnt_cntrl
+[2014-12-11 18:06:43.582960] config:max_fail_ratio=100
+[2014-12-11 18:06:43.582973] config:end_cmd=990
+[2014-12-11 18:06:43.582986] config:start_cmd=950
+[2014-12-11 18:06:43.583000] config:max_fail_ratio_959=30
+[2014-12-11 18:06:43.583013] config:max_req_959=1
+[2014-12-11 18:06:43.583027] config:interval_959=30
+[2014-12-11 18:06:43.583040] config:control_flag=0
+[2014-12-11 18:06:43.583053] config:interval=30
+[2014-12-11 18:06:43.583086] config:max_req=100000
+[2014-12-11 18:06:43.583106] reading section: isgw_cintf
+[2014-12-11 18:06:43.583120] config:quesize=10485760
+[2014-12-11 18:06:43.583147] system config load succ,conf_file=..//cfg//isgw_svrd.ini,flag=0
+[2014-12-11 18:06:43.583336] reading section: ibc_svr
+[2014-12-11 18:06:43.583362] config:ip_0=172.25.40.94
+[2014-12-11 18:06:43.583376] config:port=5998
+[2014-12-11 18:06:43.583391] config:ip_num=1
+[2014-12-11 18:06:43.583408] reading section: igame_svr
+[2014-12-11 18:06:43.583422] config:ip_0=172.27.128.79
+[2014-12-11 18:06:43.583436] config:port=5993
+[2014-12-11 18:06:43.583450] config:ip_num=1
+[2014-12-11 18:06:43.583466] reading section: admin_svr
+[2014-12-11 18:06:43.583480] config:ip_0=172.25.40.94
+[2014-12-11 18:06:43.583493] config:port=6888
+[2014-12-11 18:06:43.583507] config:use_strategy=1
+[2014-12-11 18:06:43.583521] config:conn_nums=5
+[2014-12-11 18:06:43.583536] config:max_fail_times=3
+[2014-12-11 18:06:43.583549] config:ip_num=2
+[2014-12-11 18:06:43.583563] config:recon_interval=20
+[2014-12-11 18:06:43.583577] config:ip_1=172.16.197.19
+[2014-12-11 18:06:43.583595] reading section: vip_db_1
+[2014-12-11 18:06:43.583609] config:ip=172.23.16.100
+[2014-12-11 18:06:43.583623] config:db_name=dbVip
+[2014-12-11 18:06:43.583637] config:passwd=
+[2014-12-11 18:06:43.583650] config:use_strategy=1
+[2014-12-11 18:06:43.583664] config:conn_nums=5
+[2014-12-11 18:06:43.583697] config:max_fail_times=3
+[2014-12-11 18:06:43.583713] config:user=
+[2014-12-11 18:06:43.583726] config:recon_interval=20
+[2014-12-11 18:06:43.583754] system config load succ,conf_file=../cfg/svrs.ini,flag=1
+[2014-12-11 18:06:43.583772] init conf succeed
+[2014-12-11 18:06:43.583809] init_log log_opt=-m 102400 -N 10 -f OSTREAM -p~DEBUG|~TRACE|~NOTICE -s ../log/isgw_svrd.log
+[2014-12-12 11:46:37.736227] ISGWApp use dev poll reactor, ACE_FD_SETSIZE=1024
+[2014-12-12 11:46:37.738408] init reactor succ
+[2014-12-12 11:46:37.738460] path changed to ..//bin/
+[2014-12-12 11:46:37.739070] reading section: handle
+[2014-12-12 11:46:37.739131] config:timer=0
+[2014-12-12 11:46:37.739149] config:interval=1000000
+[2014-12-12 11:46:37.739168] reading section: identify
+[2014-12-12 11:46:37.739183] config:passwd=
+[2014-12-12 11:46:37.739197] config:user=
+[2014-12-12 11:46:37.739213] reading section: common
+[2014-12-12 11:46:37.739227] config:svrs_file=../cfg/svrs.ini
+[2014-12-12 11:46:37.739242] config:log_mask=-m 102400 -N 10 -f OSTREAM -p~DEBUG|~TRACE|~NOTICE -s ../log/isgw_svrd.log
+[2014-12-12 11:46:37.739259] reading section: ibc_mgr_svc
+[2014-12-12 11:46:37.739273] config:discard_time=3
+[2014-12-12 11:46:37.739288] config:quesize=104857600
+[2014-12-12 11:46:37.739302] config:max_ibcr_record=1000
+[2014-12-12 11:46:37.739316] config:threads=100
+[2014-12-12 11:46:37.739333] reading section: isgw_mgr_svc
+[2014-12-12 11:46:37.739347] config:discard_time=2
+[2014-12-12 11:46:37.739360] config:dllname=oper
+[2014-12-12 11:46:37.739373] config:quesize=104857600
+[2014-12-12 11:46:37.739386] config:threads=100
+[2014-12-12 11:46:37.739400] config:discard_flag=1
+[2014-12-12 11:46:37.739416] reading section: system
+[2014-12-12 11:46:37.739449] config:udp_allow_ip=172.25.40.94;
+[2014-12-12 11:46:37.739464] config:allow_ip=172.25.40.94;
+[2014-12-12 11:46:37.739477] config:udp_port=5693
+[2014-12-12 11:46:37.739490] config:port=5693
+[2014-12-12 11:46:37.739505] config:svr_cfg_use_db_flag=1
+[2014-12-12 11:46:37.739518] config:ibc_svc_flag=0
+[2014-12-12 11:46:37.739532] config:udp_allow_flag=0
+[2014-12-12 11:46:37.739545] config:udp_flag=0
+[2014-12-12 11:46:37.739559] config:allow_flag=0
+[2014-12-12 11:46:37.739572] config:tcp_flag=1
+[2014-12-12 11:46:37.739586] config:ack_interval=0
+[2014-12-12 11:46:37.739605] reading section: router
+[2014-12-12 11:46:37.739619] config:conn_num_0=3
+[2014-12-12 11:46:37.739632] config:port_0=5993
+[2014-12-12 11:46:37.739646] config:ip_0=172.25.40.94
+[2014-12-12 11:46:37.739659] config:route_flag=0
+[2014-12-12 11:46:37.739676] reading section: cmd_amnt_cntrl
+[2014-12-12 11:46:37.739690] config:max_fail_ratio=100
+[2014-12-12 11:46:37.739703] config:end_cmd=990
+[2014-12-12 11:46:37.739716] config:start_cmd=950
+[2014-12-12 11:46:37.739730] config:max_fail_ratio_959=30
+[2014-12-12 11:46:37.739744] config:max_req_959=1
+[2014-12-12 11:46:37.739757] config:interval_959=30
+[2014-12-12 11:46:37.739770] config:control_flag=0
+[2014-12-12 11:46:37.739784] config:interval=30
+[2014-12-12 11:46:37.739816] config:max_req=100000
+[2014-12-12 11:46:37.739835] reading section: isgw_cintf
+[2014-12-12 11:46:37.739849] config:quesize=10485760
+[2014-12-12 11:46:37.739876] system config load succ,conf_file=..//cfg//isgw_svrd.ini,flag=0
+[2014-12-12 11:46:37.740061] reading section: ibc_svr
+[2014-12-12 11:46:37.740087] config:ip_0=172.25.40.94
+[2014-12-12 11:46:37.740101] config:port=5998
+[2014-12-12 11:46:37.740115] config:ip_num=1
+[2014-12-12 11:46:37.740133] reading section: igame_svr
+[2014-12-12 11:46:37.740147] config:ip_0=172.27.128.79
+[2014-12-12 11:46:37.740161] config:port=5993
+[2014-12-12 11:46:37.740175] config:ip_num=1
+[2014-12-12 11:46:37.740191] reading section: admin_svr
+[2014-12-12 11:46:37.740205] config:ip_0=172.25.40.94
+[2014-12-12 11:46:37.740218] config:port=6888
+[2014-12-12 11:46:37.740232] config:use_strategy=1
+[2014-12-12 11:46:37.740246] config:conn_nums=5
+[2014-12-12 11:46:37.740261] config:max_fail_times=3
+[2014-12-12 11:46:37.740275] config:ip_num=2
+[2014-12-12 11:46:37.740288] config:recon_interval=20
+[2014-12-12 11:46:37.740320] config:ip_1=172.16.197.19
+[2014-12-12 11:46:37.740340] reading section: vip_db_1
+[2014-12-12 11:46:37.740354] config:ip=172.23.16.100
+[2014-12-12 11:46:37.740367] config:db_name=dbVip
+[2014-12-12 11:46:37.740380] config:passwd=
+[2014-12-12 11:46:37.740394] config:use_strategy=1
+[2014-12-12 11:46:37.740408] config:conn_nums=5
+[2014-12-12 11:46:37.740421] config:max_fail_times=3
+[2014-12-12 11:46:37.740435] config:user=
+[2014-12-12 11:46:37.740448] config:recon_interval=20
+[2014-12-12 11:46:37.740475] system config load succ,conf_file=../cfg/svrs.ini,flag=1
+[2014-12-12 11:46:37.740493] init conf succeed
+[2014-12-12 11:46:37.740529] init_log log_opt=-m 102400 -N 10 -f OSTREAM -p~DEBUG|~TRACE|~NOTICE -s ../log/isgw_svrd.log

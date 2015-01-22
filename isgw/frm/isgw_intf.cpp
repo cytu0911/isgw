@@ -30,12 +30,21 @@ int ISGWIntf::open(void* p)
         return -1;
     }
     
+#ifdef MAX_IDLE_TIME_SEC    
+    // 因为需要清理无效连接 加上定时器机制 
+    ACE_Time_Value delay(MAX_IDLE_TIME_SEC,0);
+    ACE_Time_Value interval(MAX_IDLE_TIME_SEC,0); //10 分钟 
+    ACE_Reactor::instance()->schedule_timer(this, 0, delay, interval);
+    ACE_DEBUG((LM_NOTICE, "[%D] ISGWIntf start clean timer,interval=%d\n", MAX_IDLE_TIME_SEC));
+#endif
+    
     return 0;
 }
 
 #ifndef MSG_LEN_SIZE 
 int ISGWIntf::handle_input(ACE_HANDLE /*fd = ACE_INVALID_HANDLE*/)
 {
+    lastrtime_ = ISGWAck::instance()->get_time();
     //接收消息
     int ret = this->peer().recv((char*)recv_buf_ + recv_len_,
                                 MAX_RECV_BUF_LEN - recv_len_); //, &timeout    
@@ -163,6 +172,7 @@ int ISGWIntf::handle_input(ACE_HANDLE /*fd = ACE_INVALID_HANDLE*/)
 // 带消息长度的消息
 int ISGWIntf::handle_input(ACE_HANDLE /*fd = ACE_INVALID_HANDLE*/)
 {
+    lastrtime_ = ISGWAck::instance()->get_time();
     // 文本协议,长度字段在消息中额外占MSG_LEN_SIZE字节
     unsigned int len_field_extra_size = MSG_LEN_SIZE;          
 #ifdef BINARY_PROTOCOL
@@ -491,6 +501,23 @@ int ISGWIntf::process(char* msg, int sock_fd, int sock_seq, int msg_len)
 }
 
 #endif
+
+int ISGWIntf::handle_timeout(const ACE_Time_Value & tv, const void * arg)
+{
+    ACE_DEBUG((LM_NOTICE, "[%D] ISGWIntf handle_timeout,lastrtime=%d,now=%d\n"
+        , lastrtime_, ISGWAck::instance()->get_time()));
+    if( (ISGWAck::instance()->get_time()-lastrtime_) > MAX_IDLE_TIME_SEC)
+    {
+        ACE_DEBUG((LM_INFO, "[%D] ISGWIntf handle_timeout close with %s:%d"
+            ",sock_seq:%d\n"
+            , remote_addr_.get_host_addr()
+            , remote_addr_.get_port_number()
+            , AceSockHdrBase::get_seq()
+            ));
+        return -1; //this->handle_close ();  //the same
+    }
+    return 0;
+}
 
 int ISGWIntf::is_legal(char* msg)
 {

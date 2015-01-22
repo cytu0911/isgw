@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: isgw_uintf.h
   Author: awayfang              Date: 2008-06-25
   Description:

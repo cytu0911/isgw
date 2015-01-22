@@ -7,27 +7,27 @@
 ******************************************************************************/
 #ifndef _SYS_PROT_H_
 #define _SYS_PROT_H_
+#include <stdint.h>
 
 #ifdef TRACE
 #include "iostream"
-using namespace std;
 #endif
+using namespace std;
 
-typedef unsigned long ULONG;
-typedef unsigned int UINT;
+//typedef unsigned long ULONG;
+//typedef unsigned int UINT;
 typedef unsigned short USHORT;
-typedef unsigned char UCHAR;
 
-#define uint32 unsigned int
+//#define uint32 unsigned int
 
 int SYS_prot_encode_char(char *buffer, int length, int &pos, char value);
 int SYS_prot_encode_int(char *buffer, int length, int &pos, int value);
-int SYS_prot_encode_uint32(char *buffer, int length, int &pos, uint32 value);
+int SYS_prot_encode_uint32(char *buffer, int length, int &pos, uint32_t value);
 int SYS_prot_encode_string(char *buffer, int length, int &pos, char *value, int val_len);
 int SYS_prot_encode_string_withhead(char *buffer, int length, int &pos, char *value);
 int SYS_prot_decode_char(char *buffer, int length, int &pos, char &value);
 int SYS_prot_decode_int(char *buffer, int length, int &pos, int &value);
-int SYS_prot_decode_uint32(char *buffer, int length, int &pos, uint32 &value);
+int SYS_prot_decode_uint32(char *buffer, int length, int &pos, uint32_t &value);
 int SYS_prot_decode_string(char *buffer, int length, int &pos, char *value, int val_len);
 int SYS_prot_decode_string_withhead(char *buffer, int length, int &pos, char *value, int val_len);
 

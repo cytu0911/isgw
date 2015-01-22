@@ -89,8 +89,8 @@ char * VipDbOper::get_errmsg()
     return err_msg_;
 }
 
- int  VipDbOper::get_vip_info(QModeMsg &req, char* ack)
- {
+int  VipDbOper::get_vip_info(QModeMsg &req, char* ack)
+{
     char sql[1024];
     char db_name[32];
     memset(sql, 0x0, sizeof(sql));
@@ -144,6 +144,4 @@ char * VipDbOper::get_errmsg()
     mysql_free_result(game_res);
     
     return 0;
- }
-
- 
+}

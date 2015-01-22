@@ -31,13 +31,13 @@ int SYS_prot_encode_int(char *buffer, int length, int &pos, int value)
     return 0;
 }
 
-int SYS_prot_encode_uint32(char *buffer, int length, int &pos, uint32 value)
+int SYS_prot_encode_uint32(char *buffer, int length, int &pos, uint32_t value)
 {
-    if (pos + (int)sizeof(uint32) > length)
+    if (pos + (int)sizeof(uint32_t) > length)
         return -1;
-    uint32 trans = htonl(value);
-    memcpy(buffer + pos, &trans, sizeof(uint32));
-    pos += sizeof(uint32);
+    uint32_t trans = htonl(value);
+    memcpy(buffer + pos, &trans, sizeof(uint32_t));
+    pos += sizeof(uint32_t);
     return 0;
 }
 
@@ -90,19 +90,19 @@ int SYS_prot_decode_int(char *buffer, int length, int &pos, int &value)
     return 0;
 }
 
-int SYS_prot_decode_uint32(char *buffer, int length, int &pos, uint32 &value)
+int SYS_prot_decode_uint32(char *buffer, int length, int &pos, uint32_t &value)
 {
-    if (pos + (int)sizeof(uint32) > length)
+    if (pos + (int)sizeof(uint32_t) > length)
         return -1;
-    uint32 trans;
-    memcpy(&trans, buffer + pos, sizeof(uint32));
+    uint32_t trans;
+    memcpy(&trans, buffer + pos, sizeof(uint32_t));
     value = ntohl(trans);
 
 #ifdef TRACE
     cout<<"in decode uint32 value="<<value<<endl;
 #endif
 
-    pos += sizeof(uint32);
+    pos += sizeof(uint32_t);
     return 0;
 }
 

@@ -1,6 +1,6 @@
 /******************************************************************************
 *  @file      isgw_app.cpp
-*  @author awayfang <awayfang@tencent.com>
+*  @author awayfang
 *  @history 
 *  
 ******************************************************************************/
@@ -164,14 +164,8 @@ int ISGWApp::init_app(int , ACE_TCHAR* [])
     //消息响应类
     int ack_interval = 0;
     SysConf::instance()->get_conf_int("system", "ack_interval", &ack_interval);
-    if (ack_interval > 0)
-    {
-        ISGWAck::instance(ack_interval);
-    }
-    else
-    {
-        ISGWAck::instance();
-    }    
+    ISGWAck::instance()->init(ack_interval);
+    
     ACE_Object_Que<PriProReq>::instance()->init(OBJECT_QUEUE_SIZE);
     ACE_Object_Que<PriProAck>::instance()->init(OBJECT_QUEUE_SIZE);
 

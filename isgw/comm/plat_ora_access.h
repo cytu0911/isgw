@@ -18,7 +18,7 @@
 #define POOL_ORA_CONN_MAX 1024  //连接池最大连接数
 #define POOL_ORA_CONN_NUMS 32  //连接池缺省连接数
 
-typedef unsigned int UINT;
+//typedef unsigned int UINT;
 
 class PlatOraAccess
 {

@@ -4,9 +4,6 @@
 #include "easyace_all.h"
 #include "qmode_msg.h"
 #include "pp_prot.h"
-#include <netinet/in.h>
-#include <sys/ioctl.h>
-#include <net/if.h>
 
 namespace EASY_UTIL //easy ace µÄÃû¿Õ¼ä
 {

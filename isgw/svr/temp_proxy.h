@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: temp_proxy.h
   Author: awayfang              Date: 2010-08-20
   Description: 远程代理类模板  

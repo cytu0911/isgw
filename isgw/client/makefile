@@ -1,37 +1,17 @@
-#----------------------------------------------------------------------------
-#	Local macros
-#----------------------------------------------------------------------------
+CXX=g++
+CFLAGS=
+INCLUDE= -I../comm/ -I./
+LIBS=-static -lACE -lnsl -lm -lz -lc -ldl -lpthread -lrt 
 
-BIN   	= client
+BINARY = $(patsubst %.cpp,%.o,$(wildcard *.cpp))
+TARGET = client
 
-LDLIBS  = -leasyace 
-LDFLAGS = -static -L../../ace_using/easyace 
-CCFLAGS += -I../../easyace -I../comm/ -I./
+all:$(TARGET)
 
-FILES 	= client 
+$(TARGET):$(BINARY)
+	$(CXX) $? -o $@ $(INCLUDE) $(CFLAGS) $(LIBS)
+%.o:%.cpp
+	$(CXX) -c $< -o $@ $(INCLUDE) $(CFLAGS)
 
-SRC	= $(addsuffix .cpp,$(FILES))
-OBJ	= $(addsuffix .o,$(FILES))
-
-#----------------------------------------------------------------------------
-#	Include macros and targets
-#----------------------------------------------------------------------------
-
-include	$(ACE_ROOT)/include/makeinclude/wrapper_macros.GNU
-include	$(ACE_ROOT)/include/makeinclude/macros.GNU
-include	$(ACE_ROOT)/include/makeinclude/rules.common.GNU
-include	$(ACE_ROOT)/include/makeinclude/rules.nonested.GNU
-include	$(ACE_ROOT)/include/makeinclude/rules.bin.GNU
-include	$(ACE_ROOT)/include/makeinclude/rules.local.GNU
-
-#----------------------------------------------------------------------------
-#	Local targets
-#----------------------------------------------------------------------------
-
-#----------------------------------------------------------------------------
-#	Dependencies
-#----------------------------------------------------------------------------
-
-# DO NOT DELETE THIS LINE -- g++dep uses it.
-# DO NOT PUT ANYTHING AFTER THIS LINE, IT WILL GO AWAY.
-
+clean:
+	@rm -rf $(BINARY) $(TARGET)

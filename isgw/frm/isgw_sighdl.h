@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: isgw_sighdl.h
   Author: ianyuan              Date: 2011-01-25
   Description:

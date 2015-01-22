@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: ace_sock_hdr_base.h
   Author: awayfang              Date: 2008-06-01
   Description:

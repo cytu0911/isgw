@@ -1,5 +1,5 @@
 /************************************************************
-  Copyright (C), 2008-2018, Tencent Tech. Co., Ltd.
+  Copyright (C), 2008-2018
   FileName: isgw_intf.h
   Author: awayfang              Date: 2008-06-01
   Description:
@@ -14,6 +14,11 @@
 #define MAX_RECV_BUF_LEN MAX_INNER_MSG_LEN
 #endif
 
+// 最大空闲时间 600 s 
+#ifndef MAX_IDLE_TIME_SEC
+#define MAX_IDLE_TIME_SEC  600
+#endif
+
 class ISGWIntf : public AceSockHdrBase
 {
 
@@ -22,6 +27,7 @@ public:
     virtual ~ISGWIntf();
     virtual int open(void * = 0);
     virtual int handle_input (ACE_HANDLE fd = ACE_INVALID_HANDLE);
+    virtual int handle_timeout(const ACE_Time_Value& tv, const void *arg);
     virtual int process(char* msg, int sock_fd, int sock_seq, int msg_len);
     int is_legal(char* msg);
     int is_auth();
@@ -32,6 +38,8 @@ private:
     unsigned int  recv_len_; 
     //一个完整的消息包的长度，一般不包括消息长度字节,但是包括结束符
     unsigned int  msg_len_;
+    //消息的最后接收时间 
+    unsigned int  lastrtime_;
     //此处是近似的原子操作 如果担心可以用 ACE_Atomic_Op<ACE_Thread_Mutex, int>  替代 
     static int msg_seq_;//消息本身的序列号和网络连接的序列号有区别 
 };

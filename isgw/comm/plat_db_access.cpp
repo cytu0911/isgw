@@ -198,6 +198,15 @@ unsigned long PlatDbAccess::escape_string(char *to, const char *from
     return ret;
 }
 
+unsigned long PlatDbAccess::escape_string(string to, const string from)
+{
+    int length = from.length();
+    char to_tmp[length*2+1];
+    int ret =  escape_string(to_tmp, from.c_str(), length);
+    to = to_tmp;
+    return ret;
+}
+
 int PlatDbAccess::fini(int index)
 {
     if ( index < 0 || index >= DB_CONN_MAX )
@@ -379,6 +388,15 @@ int PlatDbAccess::free_result(MYSQL_RES*& game_res)
 	
     mysql_free_result(game_res);
     game_res = NULL;
+    return 0;
+}
+
+int PlatDbAccess::free_result(vector<MYSQL_RES*>& result_set_vec)
+{
+    for(int i=0; i<result_set_vec.size(); i++)
+    {
+        free_result(result_set_vec[i]);
+    }
     return 0;
 }
 

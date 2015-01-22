@@ -103,10 +103,10 @@ int EASY_UTIL::parse(char* str, CGI_PARAM_MAP& dest, const char minor
     , const char* major)
 {
     char name[256];
-    char value[256];
+    char value[4096];
 
     char* ptr = NULL;
-    char* p = ACE_OS::strtok_r(str, major, &ptr);
+    char* p = strtok_r(str, major, &ptr);
     while (p != NULL) 
     {
         memset(name, 0x0, sizeof(name));
@@ -120,7 +120,7 @@ int EASY_UTIL::parse(char* str, CGI_PARAM_MAP& dest, const char minor
             strcpy(value, s + 1);
             dest[name] = value;
         }
-        p = ACE_OS::strtok_r(NULL, major, &ptr);
+        p = strtok_r(NULL, major, &ptr);
     }
 
     return 0;

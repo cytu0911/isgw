@@ -140,17 +140,17 @@ int QModeMsg::parse_msg()
     char name[QMSG_NAME_LEN];
     char* ptr = NULL;
     char* p = strtok_r(tmp_body, QMSG_SEP, &ptr);
-	while (p != NULL) 
-	{
-	    char* s = strchr(p, '=');
-	    if (s != NULL)
-	    {
-	        int name_len = s - p > sizeof(name)-1 ? sizeof(name)-1 : s - p;            
-	        snprintf(name, name_len+1, "%s", p);
-	        msg_map_[name] = s + 1;
-	    }
-	    p = strtok_r(NULL, QMSG_SEP, &ptr);
-	}
+    while (p != NULL) 
+    {
+        char* s = strchr(p, '=');
+        if (s != NULL)
+        {
+            int name_len = s - p > sizeof(name)-1 ? sizeof(name)-1 : s - p;            
+            snprintf(name, name_len+1, "%s", p);
+            msg_map_[name] = s + 1;
+        }
+        p = strtok_r(NULL, QMSG_SEP, &ptr);
+    }
 
     // 对内置变量赋值 
     cmd_ = atoi(((msg_map_)[FIELD_NAME_CMD]).c_str());

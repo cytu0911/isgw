@@ -28,7 +28,7 @@ AceSockHdrBase::~AceSockHdrBase()
         , strerror(errno)
         ));
     //析构时主动关闭连接 add by awayfang 2010-01-22 
-    this->peer().close();
+    //this->peer().close();
 }
 
 int AceSockHdrBase::open(void* p)
@@ -184,7 +184,8 @@ int AceSockHdrBase::send_n(char* ack_msg, int len)
             Stat::instance()->incre_stat(STAT_CODE_ACK_DISCONN);
             return -1;
         case -1:
-            if (errno == EWOULDBLOCK || errno == EAGAIN || errno == EINPROGRESS)
+            if (errno == EWOULDBLOCK || errno == EAGAIN 
+                || errno == EINPROGRESS|| ETIME == errno )
             {
                 ACE_DEBUG((LM_ERROR, "[%D] AceSockHdrBase send_n failed,ret=%d"
                     ",errno=%d,errmsg=%s,ip=%s\n"
@@ -194,7 +195,7 @@ int AceSockHdrBase::send_n(char* ack_msg, int len)
                     , remote_addr_.get_host_addr()
                     ));
                 Stat::instance()->incre_stat(STAT_CODE_ACK_BLOCK);
-                return 0;
+                return -1;
             }
             else
             {

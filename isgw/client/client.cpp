@@ -14,6 +14,7 @@ int ACE_TMAIN(int argc, ACE_TCHAR *argv[])
     if(argc < 4 )
     {
         printf("Usage: %s <ip> <port> <content> [rtimes] [interval]\n", argv[0]);
+	ACE_DEBUG((LM_ERROR, "ERROR:\n"));
         return 1;
     }
         

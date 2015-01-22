@@ -19,7 +19,7 @@
 #define DB_CONN_MAX 50  //DB 连接池最大连接数
 #define POOL_CONN_DEF 10  //连接池缺省连接数
 
-typedef unsigned int UINT;
+//typedef unsigned int UINT;
 
 class PlatDbAccess
 {
@@ -30,8 +30,8 @@ public:
     int init(const char *host, const char *user, const char *passwd, int port
         , int index); //指定参数初始化连接
     int set_conns_char_set(const char* character_set); //把该连接池的所有连接设置为需要的字符集
-    unsigned long escape_string(char *to, const char *from, unsigned long length); //把该连接池的所有连接... 
-    
+    unsigned long escape_string(char *to, const char *from, unsigned long length);
+    unsigned long escape_string(string to, const string from);
     // SELECT caller need to free result_set
     int exec_query(const char* sql, MYSQL_RES*& result_set, unsigned int uin=0);
     int exec_multi_query(const char* sql, vector<MYSQL_RES*>& result_set_list, unsigned int uin=0);
@@ -43,7 +43,8 @@ public:
     int exec_trans(const vector<string>& sqls, int& last_insert_id, int& affected_rows
         , unsigned int uin=0);
 
-	int free_result(MYSQL_RES*& game_res);
+    int free_result(MYSQL_RES*& game_res);
+    int free_result(vector<MYSQL_RES*>& result_set_vec);
     
 private:
     int fini(int index); //终止第index个连接

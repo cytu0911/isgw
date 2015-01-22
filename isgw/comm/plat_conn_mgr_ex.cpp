@@ -387,10 +387,9 @@ int PlatConnMgrEx::send_recv(const void * send_buf, int send_len
         || tmp_ret == 0)                 // 连接已经被对端关闭, 处于close wait状态
     {
         ACE_DEBUG((LM_INFO, "[%D] PlatConnMgrEx send_recv connection close detected,"
-            "uin=%u,ip=%s,index=%d\n",
-            uin, ip_[ip_idx], index));
+            "uin=%u,ip=%s,index=%d\n", uin, ip_[ip_idx], index));
         init_conn(index, ip_idx);
-	    if(conn_[ip_idx][index] == NULL)
+	 if(conn_[ip_idx][index] == NULL)
         {
             ACE_DEBUG((LM_ERROR, "[%D] PlatConnMgrEx send_recv reconnect failed,"
                 "index=%d,ip_idx=%d\n", index, ip_idx));
@@ -472,8 +471,7 @@ int PlatConnMgrEx::send_recv_ex(const void * send_buf, int send_len
         || tmp_ret == 0)                 // 连接已经被对端关闭, 处于close wait状态
     {
         ACE_DEBUG((LM_INFO, "[%D] PlatConnMgrEx send_recv_ex connection close detected,"
-            "uin=%u,ip=%s,index=%d\n",
-            uin, ip_[ip_idx], index));
+            "uin=%u,ip=%s,index=%d\n", uin, ip_[ip_idx], index));
         init_conn(index, ip_idx);
     	if(conn_[ip_idx][index] == NULL)
     	{

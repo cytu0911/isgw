@@ -1,6 +1,6 @@
 /******************************************************************************
 *  @file      ibc_oper_fac.h
-*  @author awayfang <awayfang@tencent.com>
+*  @author awayfang
 *  @history 
 *  isgw 框架的 批量处理模块 
 *  

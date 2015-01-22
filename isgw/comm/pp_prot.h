@@ -202,7 +202,7 @@ typedef enum _PP_ERROR
     ERROR_OIDB = -10002, //OIDB 错误
     ERROR_MP = -10001, //营销平台错误 
     
-	ERROR_FORWARD = -11, //请求转发失败
+    ERROR_FORWARD = -11, //请求转发失败
     ERROR_TIMEOUT_SER = -10, //业务接口发现消息超时 
     ERROR_IBC_FAC = -8, //ibc fac 异常
     ERROR_DECODE = -7, //内部协议(内容)解析非法 
